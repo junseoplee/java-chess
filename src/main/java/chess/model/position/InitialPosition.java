@@ -42,11 +42,7 @@ public enum InitialPosition {
     this.rank = rank;
   }
 
-  public char getFile() {
-    return file;
-  }
-
-  public int getRank() {
-    return rank;
+  public Position getPosition() {
+    return new Position(file, rank);
   }
 }
