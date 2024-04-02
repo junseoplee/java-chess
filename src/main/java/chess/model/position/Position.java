@@ -5,7 +5,7 @@ public class Position {
   private final File file;
   private final Rank rank;
 
-  public Position(final char file, final int rank) {
+  public Position(final int file, final int rank) {
     this.file = File.from(file);
     this.rank = Rank.from(rank);
   }

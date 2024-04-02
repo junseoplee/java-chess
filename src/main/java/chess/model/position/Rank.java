@@ -13,21 +13,21 @@ public enum Rank {
   RANK_7(7),
   RANK_8(8);
 
-  private final int rank;
+  private final int value;
 
   Rank(int rank) {
-    this.rank = rank;
+    this.value = rank;
   }
 
-  public static Rank from(int rankInt) {
+  public static Rank from(int value) {
     return Arrays.stream(Rank.values())
-                 .filter(rank -> rank.getRank() == rankInt)
+                 .filter(rank -> rank.getValue() == value)
                  .findFirst()
                  .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.MISMATCH_ARGUMENT.getMessage()));
   }
 
-  public int getRank() {
-    return rank;
+  public int getValue() {
+    return value;
   }
 }
 

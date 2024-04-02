@@ -1,43 +1,43 @@
 package chess.model.position;
 
 public enum InitialPosition {
-  WHITE_ROOK_LEFT('a', 1),
-  WHITE_KNIGHT_LEFT('b', 1),
-  WHITE_BISHOP_LEFT('c', 1),
-  WHITE_QUEEN('d', 1),
-  WHITE_KING('e', 1),
-  WHITE_BISHOP_RIGHT('f', 1),
-  WHITE_KNIGHT_RIGHT('g', 1),
-  WHITE_ROOK_RIGHT('h', 1),
-  WHITE_PAWN_A('a', 2),
-  WHITE_PAWN_B('b', 2),
-  WHITE_PAWN_C('c', 2),
-  WHITE_PAWN_D('d', 2),
-  WHITE_PAWN_E('e', 2),
-  WHITE_PAWN_F('f', 2),
-  WHITE_PAWN_G('g', 2),
-  WHITE_PAWN_H('h', 2),
-  BLACK_ROOK_LEFT('a', 8),
-  BLACK_KNIGHT_LEFT('b', 8),
-  BLACK_BISHOP_LEFT('c', 8),
-  BLACK_QUEEN('d', 8),
-  BLACK_KING('e', 8),
-  BLACK_BISHOP_RIGHT('f', 8),
-  BLACK_KNIGHT_RIGHT('g', 8),
-  BLACK_ROOK_RIGHT('h', 8),
-  BLACK_PAWN_A('a', 7),
-  BLACK_PAWN_B('b', 7),
-  BLACK_PAWN_C('c', 7),
-  BLACK_PAWN_D('d', 7),
-  BLACK_PAWN_E('e', 7),
-  BLACK_PAWN_F('f', 7),
-  BLACK_PAWN_G('g', 7),
-  BLACK_PAWN_H('h', 7);
+  WHITE_ROOK_LEFT(1, 1),
+  WHITE_KNIGHT_LEFT(2, 1),
+  WHITE_BISHOP_LEFT(3, 1),
+  WHITE_QUEEN(4, 1),
+  WHITE_KING(5, 1),
+  WHITE_BISHOP_RIGHT(6, 1),
+  WHITE_KNIGHT_RIGHT(7, 1),
+  WHITE_ROOK_RIGHT(8, 1),
+  WHITE_PAWN_A(1, 2),
+  WHITE_PAWN_B(2, 2),
+  WHITE_PAWN_C(3, 2),
+  WHITE_PAWN_D(4, 2),
+  WHITE_PAWN_E(5, 2),
+  WHITE_PAWN_F(6, 2),
+  WHITE_PAWN_G(7, 2),
+  WHITE_PAWN_H(8, 2),
+  BLACK_ROOK_LEFT(1, 8),
+  BLACK_KNIGHT_LEFT(2, 8),
+  BLACK_BISHOP_LEFT(3, 8),
+  BLACK_QUEEN(4, 8),
+  BLACK_KING(5, 8),
+  BLACK_BISHOP_RIGHT(6, 8),
+  BLACK_KNIGHT_RIGHT(7, 8),
+  BLACK_ROOK_RIGHT(8, 8),
+  BLACK_PAWN_A(1, 7),
+  BLACK_PAWN_B(2, 7),
+  BLACK_PAWN_C(3, 7),
+  BLACK_PAWN_D(4, 7),
+  BLACK_PAWN_E(5, 7),
+  BLACK_PAWN_F(6, 7),
+  BLACK_PAWN_G(7, 7),
+  BLACK_PAWN_H(8, 7);
 
-  private final char file;
+  private final int file;
   private final int rank;
 
-  InitialPosition(char file, int rank) {
+  InitialPosition(int file, int rank) {
     this.file = file;
     this.rank = rank;
   }
@@ -46,7 +46,7 @@ public enum InitialPosition {
     return new Position(file, rank);
   }
 
-  public char getFile() {
+  public int getFile() {
     return file;
   }
 
