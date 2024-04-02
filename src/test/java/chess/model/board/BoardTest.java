@@ -1,6 +1,5 @@
 package chess.model.board;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 import chess.model.piece.Piece;
