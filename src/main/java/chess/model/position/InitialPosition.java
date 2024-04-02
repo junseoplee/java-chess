@@ -45,4 +45,12 @@ public enum InitialPosition {
   public Position getPosition() {
     return new Position(file, rank);
   }
+
+  public char getFile() {
+    return file;
+  }
+
+  public int getRank() {
+    return rank;
+  }
 }
