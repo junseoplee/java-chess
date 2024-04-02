@@ -3,7 +3,6 @@ package chess.model.piece.pieces;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import chess.model.position.Color;
-import chess.model.position.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,13 +12,11 @@ class PawnTest {
   void 폰_초기화_테스트() {
     //given
     Color color = Color.WHITE;
-    Position position = new Position('a', 2);
 
     //when
-    Pawn pawn = new Pawn(color, position);
+    Pawn pawn = new Pawn(color);
 
     //then
     assertThat(pawn.getColor()).isEqualTo(color);
-    assertThat(pawn.getPosition()).isEqualTo(position);
   }
 }
