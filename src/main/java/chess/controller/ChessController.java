@@ -5,7 +5,6 @@ import chess.model.board.Board;
 import chess.model.board.InitialBoard;
 import chess.model.piece.Piece;
 import chess.model.position.Position;
-import chess.view.ErrorMessage;
 import chess.view.InputView;
 import chess.view.OutputView;
 import java.util.Map;
@@ -28,24 +27,23 @@ public class ChessController {
   }
 
   private void processCommand() {
-    try {
-      Command command = inputView.receiveCommand();
-      Board board = initialBoard.createInitialBoard();
-      Map<Position, Piece> boardMap = board.getMap();
+    boolean running = true;
 
-      switch (command.getCommand()) {
-        case "start":
+    while (running) {
+      try {
+        Command command = inputView.receiveCommand();
+        Board board = initialBoard.createInitialBoard();
+        Map<Position, Piece> boardMap = board.getMap();
+
+        if ("start".equals(command.getCommand())) {
           outputView.printBoard(boardMap);
-          processCommand();
-          break;
-        case "end":
-          break;
-        default:
-          throw new IllegalArgumentException(ErrorMessage.MISMATCH_COMMAND.getMessage());
+        }
+        if ("end".equals(command.getCommand())) {
+          running = false;
+        }
+      } catch (IllegalArgumentException exception) {
+        System.out.println(exception.getMessage());
       }
-    } catch (IllegalArgumentException exception) {
-      System.out.println(exception.getMessage());
-      processCommand();
     }
   }
 }
