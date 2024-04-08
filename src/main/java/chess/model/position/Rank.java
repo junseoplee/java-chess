@@ -23,7 +23,7 @@ public enum Rank {
     return Arrays.stream(Rank.values())
                  .filter(rank -> rank.getValue() == value)
                  .findFirst()
-                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.MISMATCH_ARGUMENT.getMessage()));
+                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.MISMATCH_RANK_ARGUMENT.getMessage()));
   }
 
   public int getValue() {
