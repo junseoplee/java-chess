@@ -23,7 +23,7 @@ public enum File {
     return Arrays.stream(File.values())
                  .filter(file -> file.getValue() == value)
                  .findFirst()
-                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.MISMATCH_ARGUMENT.getMessage()));
+                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.MISMATCH_FILE_ARGUMENT.getMessage()));
   }
 
   public int getValue() {
