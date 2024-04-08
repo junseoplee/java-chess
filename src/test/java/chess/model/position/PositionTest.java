@@ -19,7 +19,7 @@ class PositionTest {
     Position position = new Position(file, rankNumber);
 
     //then
-    assertThat(position.getFile()).isEqualTo(File.FILE_C);
+    assertThat(position.getFile()).isEqualTo(File.C);
     assertThat(position.getRank()).isEqualTo(Rank.RANK_4);
   }
 }
