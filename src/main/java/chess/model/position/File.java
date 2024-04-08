@@ -4,14 +4,14 @@ import chess.view.ErrorMessage;
 import java.util.Arrays;
 
 public enum File {
-  FILE_A(1),
-  FILE_B(2),
-  FILE_C(3),
-  FILE_D(4),
-  FILE_E(5),
-  FILE_F(6),
-  FILE_G(7),
-  FILE_H(8);
+  A(1),
+  B(2),
+  C(3),
+  D(4),
+  E(5),
+  F(6),
+  G(7),
+  H(8);
 
   private final int value;
 
