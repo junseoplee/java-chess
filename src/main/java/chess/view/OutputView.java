@@ -1,7 +1,6 @@
 package chess.view;
 
 import chess.model.piece.Piece;
-import chess.model.position.Color;
 import chess.model.position.File;
 import chess.model.position.Position;
 import chess.model.position.Rank;
@@ -41,7 +40,7 @@ public class OutputView {
       final int column = file.getValue();
       final int row = rank.getValue();
 
-      String symbol = assignSymbol(piece);
+      String symbol = Symbol.assignSymbol(piece);
       chessBoard.get(BOARD_SIZE - row).set(column - INDEX_OFFSET, symbol);
     }
   }
@@ -50,15 +49,5 @@ public class OutputView {
     return IntStream.range(0, BOARD_SIZE)
                     .mapToObj(it -> new ArrayList<>(Collections.nCopies(BOARD_SIZE, Symbol.EMPTY.getSymbol())))
                     .collect(Collectors.toList());
-  }
-
-  private static String assignSymbol(final Piece piece) {
-    if (piece.getColor() == Color.WHITE) {
-      return Symbol.getSymbolForWhitePiece(piece.getClass());
-    }
-    if (piece.getColor() == Color.BLACK) {
-      return Symbol.getSymbolForBlackPiece(piece.getClass());
-    }
-    throw new IllegalArgumentException(ErrorMessage.MISMATCH_SYMBOL.getMessage());
   }
 }

@@ -1,81 +1,40 @@
 package chess.view;
 
 import chess.model.piece.Piece;
-import chess.model.piece.pieces.Bishop;
-import chess.model.piece.pieces.King;
-import chess.model.piece.pieces.Knight;
-import chess.model.piece.pieces.Pawn;
-import chess.model.piece.pieces.Queen;
-import chess.model.piece.pieces.Rook;
+import chess.model.piece.pieces.*;
+import chess.model.position.Color;
 
 public enum Symbol {
-  KING_WHITE("k"),
-  QUEEN_WHITE("q"),
-  ROOK_WHITE("r"),
-  BISHOP_WHITE("b"),
-  KNIGHT_WHITE("n"),
-  PAWN_WHITE("p"),
+  KING("k", King.class),
+  QUEEN("q", Queen.class),
+  ROOK("r", Rook.class),
+  BISHOP("b", Bishop.class),
+  KNIGHT("n", Knight.class),
+  PAWN("p", Pawn.class),
 
-  KING_BLACK("K"),
-  QUEEN_BLACK("Q"),
-  ROOK_BLACK("R"),
-  BISHOP_BLACK("B"),
-  KNIGHT_BLACK("N"),
-  PAWN_BLACK("P"),
-
-  EMPTY(".");
+  EMPTY(".", null);
 
   private final String symbol;
+  private final Class<? extends Piece> pieceClass;
 
-  Symbol(String symbol) {
+  Symbol(String symbol, Class<? extends Piece> pieceClass) {
     this.symbol = symbol;
-  }
-
-  public static String getSymbolForWhitePiece(Class<? extends Piece> pieceClass) {
-    if (pieceClass == King.class) {
-      return Symbol.KING_WHITE.getSymbol();
-    }
-    if (pieceClass == Queen.class) {
-      return Symbol.QUEEN_WHITE.getSymbol();
-    }
-    if (pieceClass == Rook.class) {
-      return Symbol.ROOK_WHITE.getSymbol();
-    }
-    if (pieceClass == Bishop.class) {
-      return Symbol.BISHOP_WHITE.getSymbol();
-    }
-    if (pieceClass == Knight.class) {
-      return Symbol.KNIGHT_WHITE.getSymbol();
-    }
-    if (pieceClass == Pawn.class) {
-      return Symbol.PAWN_WHITE.getSymbol();
-    }
-    throw new IllegalArgumentException(ErrorMessage.MISMATCH_SYMBOL.getMessage());
-  }
-
-  public static String getSymbolForBlackPiece(Class<? extends Piece> pieceClass) {
-    if (pieceClass == King.class) {
-      return Symbol.KING_BLACK.getSymbol();
-    }
-    if (pieceClass == Queen.class) {
-      return Symbol.QUEEN_BLACK.getSymbol();
-    }
-    if (pieceClass == Rook.class) {
-      return Symbol.ROOK_BLACK.getSymbol();
-    }
-    if (pieceClass == Bishop.class) {
-      return Symbol.BISHOP_BLACK.getSymbol();
-    }
-    if (pieceClass == Knight.class) {
-      return Symbol.KNIGHT_BLACK.getSymbol();
-    }
-    if (pieceClass == Pawn.class) {
-      return Symbol.PAWN_BLACK.getSymbol();
-    }
-    throw new IllegalArgumentException(ErrorMessage.MISMATCH_SYMBOL.getMessage());
+    this.pieceClass = pieceClass;
   }
 
   public String getSymbol() {
     return symbol;
+  }
+
+  public static String assignSymbol(Piece piece) {
+    for (Symbol symbol : Symbol.values()) {
+      if (symbol.pieceClass == piece.getClass() && piece.getColor().equals(Color.WHITE)) {
+        return symbol.getSymbol().toLowerCase();
+      }
+      if (symbol.pieceClass == piece.getClass() && !piece.getColor().equals(Color.WHITE)) {
+        return symbol.getSymbol().toUpperCase();
+      }
+    }
+    throw new IllegalArgumentException(ErrorMessage.MISMATCH_SYMBOL.getMessage());
   }
 }
