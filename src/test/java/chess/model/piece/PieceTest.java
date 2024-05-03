@@ -7,7 +7,6 @@ import chess.model.movement.Movement;
 import chess.model.movement.Path;
 import chess.model.position.Color;
 import chess.model.position.Position;
-import chess.view.ErrorMessage;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -59,7 +58,7 @@ class PieceTest {
     }
 
     @Override
-    public Path findPath(Position from, Position to, Piece destination) {
+    public Path findPath(Position from, Position to) {
       return null;
     }
   }

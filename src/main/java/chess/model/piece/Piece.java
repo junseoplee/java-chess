@@ -15,7 +15,7 @@ public abstract class Piece {
     this.color = color;
   }
 
-  public abstract Path findPath(Position from, Position to, Piece destination);
+  public abstract Path findPath(Position from, Position to);
 
   public void validateMovement(final Movement movement, List<Movement> availableMovements) {
     if (!availableMovements.contains(movement)) {
@@ -23,8 +23,8 @@ public abstract class Piece {
     }
   }
 
-  public final void validateSameColor(Piece other) {
-    if (color.isSameColor(other.color)) {
+  public void validateSameColor(Piece other) {
+    if (other != null && color.isSameColor(other.color)) {
       throw new IllegalArgumentException(ErrorMessage.SAME_COLOR_PIECE.getMessage());
     }
   }
@@ -36,4 +36,11 @@ public abstract class Piece {
   public Color getColor() {
     return color;
   }
+
+  public static final Piece EMPTY = new Piece(Color.NONE) {
+    @Override
+    public Path findPath(Position from, Position to) {
+      throw new UnsupportedOperationException("Empty 말은 이동할 수 없습니다.");
+    }
+  };
 }
