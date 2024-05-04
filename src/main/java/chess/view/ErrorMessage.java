@@ -6,7 +6,12 @@ public enum ErrorMessage {
   MISMATCH_RANK_ARGUMENT("[ERROR] 잘못된 랭크 규격입니다."),
   MISMATCH_SYMBOL("[ERROR] 잘못된 피스 타입입니다."),
   HAS_OBSTACLE("[ERROR] 경로에 다른 체스 말이 존재합니다."),
-  MISMATCH_MOVEMENT("[ERROR] 찾을 수 없는 움직임입니다.");
+  NO_PIECE_AT_SOURCE("[ERROR] 출발점에 말이 없습니다."),
+  INVALID_TURN("[ERROR] 차례에 맞는 말을 선택해야 합니다."),
+
+  INVALID_DIRECTION("[ERROR] 이동할 수 없는 방향입니다."),
+  SAME_COLOR_PIECE("[ERROR] 같은 색의 말로는 이동할 수 없습니다."),
+  SAME_POSITION("[ERROR] 출발지와 목적지가 동일하여 이동할 수 없습니다.");
 
   private final String message;
 
