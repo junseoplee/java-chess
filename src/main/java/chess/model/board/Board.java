@@ -11,7 +11,7 @@ public class Board {
 
   private final Map<Position, Piece> board;
 
-  public Board(Map<Position, Piece> board) {
+  public Board(final Map<Position, Piece> board) {
     this.board = board;
   }
 
@@ -24,7 +24,7 @@ public class Board {
     validateIsFromEmpty(from);
     validateIsDifferentColor(from, turn);
 
-    Piece destination = board.getOrDefault(to, Piece.EMPTY);
+    Piece destination = board.get(to);
     board.get(from).validateSameColor(destination);
 
     Path path = board.get(from).findPath(from, to);
@@ -49,6 +49,6 @@ public class Board {
   }
 
   public Map<Position, Piece> getMap() {
-    return board;
+    return Map.copyOf(board);
   }
 }
