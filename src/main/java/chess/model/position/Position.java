@@ -2,6 +2,7 @@ package chess.model.position;
 
 import chess.model.movement.Movement;
 import chess.view.ErrorMessage;
+import java.util.Objects;
 
 public class Position {
   private final File file;
@@ -43,6 +44,23 @@ public class Position {
 
   public Position calculateNextPosition(Movement movement) {
     return movement.findNextPositionFrom(file, rank);
+  }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    final Position position = (Position) o;
+    return file == position.file && rank == position.rank;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(file, rank);
   }
 
   public File getFile() {
