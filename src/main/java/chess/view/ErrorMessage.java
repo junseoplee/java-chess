@@ -12,7 +12,8 @@ public enum ErrorMessage {
   INVALID_DIRECTION("[ERROR] 이동할 수 없는 방향입니다."),
   SAME_COLOR_PIECE("[ERROR] 같은 색의 말로는 이동할 수 없습니다."),
   SAME_POSITION("[ERROR] 출발지와 목적지가 동일하여 이동할 수 없습니다."),
-  INVALID_MOVE_COMMAND("[ERROR] 이동은 move source위치 target위치여야 합니다.");
+  INVALID_MOVE_COMMAND("[ERROR] 이동은 move source위치 target위치여야 합니다."),
+  INVALID_COMMAND("[ERROR] 유효하지 않은 명령입니다.");
 
   private final String message;
 
