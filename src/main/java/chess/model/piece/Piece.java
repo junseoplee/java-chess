@@ -29,18 +29,7 @@ public abstract class Piece {
     }
   }
 
-  public final boolean isSameColor(Color turn) {
-    return this.color.equals(turn);
-  }
-
   public Color getColor() {
     return color;
   }
-
-  public static final Piece EMPTY = new Piece(Color.NONE) {
-    @Override
-    public Path findPath(Position from, Position to) {
-      throw new UnsupportedOperationException("Empty 말은 이동할 수 없습니다.");
-    }
-  };
 }
