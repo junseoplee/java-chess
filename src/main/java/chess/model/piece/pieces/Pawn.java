@@ -71,7 +71,7 @@ public class Pawn extends Piece {
       return new Path(List.of(wayPoint, to));
     }
 
-    throw new IllegalStateException(ErrorMessage.INVALID_DIRECTION.getMessage());
+    throw new IllegalArgumentException(ErrorMessage.INVALID_DIRECTION.getMessage());
   }
 
   private boolean isOneDiff(final Position from, final Position to) {
