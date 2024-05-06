@@ -33,7 +33,7 @@ public class OutputView {
     System.out.print(System.lineSeparator());
   }
 
-  private static void assignSymbols(final Map<Position, Piece> boardMap, final List<List<String>> chessBoard) {
+  private void assignSymbols(final Map<Position, Piece> boardMap, final List<List<String>> chessBoard) {
     for (final Map.Entry<Position, Piece> positionPieceEntry : boardMap.entrySet()) {
       final Position position = positionPieceEntry.getKey();
       final Piece piece = positionPieceEntry.getValue();
@@ -47,7 +47,7 @@ public class OutputView {
     }
   }
 
-  private static List<List<String>> createEmptyBoard() {
+  private List<List<String>> createEmptyBoard() {
     return IntStream.range(0, BOARD_SIZE)
                     .mapToObj(it -> new ArrayList<>(Collections.nCopies(BOARD_SIZE, Symbol.EMPTY.getSymbol())))
                     .collect(Collectors.toList());
