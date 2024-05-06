@@ -24,7 +24,7 @@ public class Board {
     validateIsFromEmpty(from);
     validateIsDifferentColor(from, turn);
 
-    Piece destination = board.get(to);
+    Piece destination = board.getOrDefault(to, null);
     board.get(from).validateSameColor(destination);
 
     Path path = board.get(from).findPath(from, to);
@@ -38,7 +38,7 @@ public class Board {
   }
 
   private void validateIsDifferentColor(final Position from, final Color turn) {
-    if (!board.get(from).getColor().isDifferentColor(turn)) {
+    if (board.get(from).getColor().isDifferentColor(turn)) {
       throw new IllegalArgumentException(ErrorMessage.INVALID_TURN.getMessage());
     }
   }
