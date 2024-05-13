@@ -1,14 +1,15 @@
 package chess.controller;
 
-import static chess.view.InputView.END_COMMAND;
+import static chess.model.Command.END_COMMAND;
 
+import chess.model.Command;
 import chess.model.board.Board;
 import chess.model.board.InitialBoard;
 import chess.model.position.Color;
 import chess.model.position.Position;
+import chess.view.ErrorMessage;
 import chess.view.InputView;
 import chess.view.OutputView;
-import java.util.List;
 
 public class ChessController {
 
@@ -26,21 +27,25 @@ public class ChessController {
 
   public void runChess() {
     outputView.printStartMessage();
-    String receivedCommand = inputView.receiveStartCommand();
-    if (!receivedCommand.equals(InputView.START_COMMAND)) {
+    Command receivedCommand = new Command(inputView.receiveCommand());
+
+    if (receivedCommand.getCommand().equals(END_COMMAND)) {
       return;
+    }
+    if (!receivedCommand.getCommand().equals(Command.START_COMMAND)) {
+      throw new IllegalArgumentException(ErrorMessage.INVALID_START_COMMAND.getMessage());
     }
 
     outputView.printBoard(board.getMap());
 
     while (true) {
       try {
-        List<String> receivedMoveOrEndCommand = inputView.receiveMoveOrEndCommand();
-        if (receivedMoveOrEndCommand.get(0).equals(END_COMMAND)) {
+        receivedCommand = new Command(inputView.receiveCommand());
+        if (receivedCommand.getCommand().equals(END_COMMAND)) {
           break;
         }
-        Position sourcePosition = parsePosition(receivedMoveOrEndCommand.get(0));
-        Position targetPosition = parsePosition(receivedMoveOrEndCommand.get(1));
+        Position sourcePosition = parsePosition(receivedCommand.getSourcePosition());
+        Position targetPosition = parsePosition(receivedCommand.getTargetPosition());
         board.move(sourcePosition, targetPosition, currentTurn);
         currentTurn = currentTurn.changeTurn(currentTurn);
         outputView.printBoard(board.getMap());
@@ -53,6 +58,6 @@ public class ChessController {
   private Position parsePosition(String position) {
     int file = position.charAt(0) - 'a' + 1;
     int rank = position.charAt(1) - '0';
-    return new Position(file, rank); // 생성자에 1~8 유효성 검사
+    return new Position(file, rank); // 생성자에 1~8 유효성 검사가 있다
   }
 }
