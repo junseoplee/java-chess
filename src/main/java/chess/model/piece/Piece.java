@@ -29,6 +29,12 @@ public abstract class Piece {
     }
   }
 
+  public void validateTurn(Color turn) {
+    if (color != turn) {
+      throw new IllegalArgumentException(ErrorMessage.INVALID_TURN.getMessage());
+    }
+  }
+
   public Color getColor() {
     return color;
   }

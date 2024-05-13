@@ -22,7 +22,7 @@ public class Board {
 
   private void validateMove(final Position from, final Position to, final Color turn) {
     validateNotEmpty(from);
-    validateIsDifferentColor(from, turn);
+    validateTurn(from, turn);
 
     Piece destination = board.getOrDefault(to, null);
     board.get(from).validateSameColor(destination);
@@ -37,10 +37,8 @@ public class Board {
     }
   }
 
-  private void validateIsDifferentColor(final Position from, final Color turn) {
-    if (board.get(from).getColor().isDifferentColor(turn)) {
-      throw new IllegalArgumentException(ErrorMessage.INVALID_TURN.getMessage());
-    }
+  private void validateTurn(final Position from, final Color turn) {
+    board.get(from).validateTurn(turn);
   }
 
   private void movePiece(final Position from, final Position to) {
