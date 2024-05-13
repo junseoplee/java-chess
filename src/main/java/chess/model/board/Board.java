@@ -21,7 +21,7 @@ public class Board {
   }
 
   private void validateMove(final Position from, final Position to, final Color turn) {
-    validateIsFromEmpty(from);
+    validateNotEmpty(from);
     validateIsDifferentColor(from, turn);
 
     Piece destination = board.getOrDefault(to, null);
@@ -31,7 +31,7 @@ public class Board {
     path.validatePath(board.keySet());
   }
 
-  private void validateIsFromEmpty(final Position from) {
+  private void validateNotEmpty(final Position from) {
     if (!board.containsKey(from)) {
       throw new IllegalArgumentException(ErrorMessage.NO_PIECE_AT_SOURCE.getMessage());
     }
