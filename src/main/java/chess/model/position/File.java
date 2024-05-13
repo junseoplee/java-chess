@@ -26,6 +26,10 @@ public enum File {
                  .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.MISMATCH_FILE_ARGUMENT.getMessage()));
   }
 
+  public int calculateDiff(File other) {
+    return this.value - other.value;
+  }
+
   public int getValue() {
     return value;
   }

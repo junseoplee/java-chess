@@ -1,5 +1,7 @@
 package chess.model.piece.pieces;
 
+import static chess.model.movement.MovementConverter.convertMovement;
+
 import chess.model.movement.Movement;
 import chess.model.movement.Path;
 import chess.model.piece.Piece;
@@ -20,7 +22,7 @@ public class King extends Piece {
 
   @Override
   public Path findPath(Position from, Position to) {
-    Movement movement = to.convertMovement(from);
+    Movement movement = convertMovement(from, to);
     validateMovement(movement, availableMovements);
 
     validateAvailableDestination(from, to, movement);

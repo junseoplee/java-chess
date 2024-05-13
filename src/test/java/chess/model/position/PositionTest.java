@@ -1,5 +1,6 @@
 package chess.model.position;
 
+import static chess.model.movement.MovementConverter.convertMovement;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -32,7 +33,7 @@ class PositionTest {
     Position to = new Position(3, 4);
 
     // when & then
-    assertThatThrownBy(() -> to.convertMovement(from))
+    assertThatThrownBy(() -> convertMovement(from, to))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -44,7 +45,7 @@ class PositionTest {
     Position to = new Position(8, 7);
 
     // when & then
-    assertThatThrownBy(() -> to.convertMovement(from))
+    assertThatThrownBy(() -> convertMovement(from, to))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -55,7 +56,7 @@ class PositionTest {
     Position from = new Position(1, 1);
     Position to = new Position(2, 3);
     //when
-    Movement movement = to.convertMovement(from);
+    Movement movement = convertMovement(from, to);
     //then
     assertThat(movement).isEqualTo(Movement.UP_UP_RIGHT);
   }
@@ -67,7 +68,7 @@ class PositionTest {
     Position from = new Position(1, 1);
     Position to = new Position(1, 7);
     //when
-    Movement movement = to.convertMovement(from);
+    Movement movement = convertMovement(from,to);
     //then
     assertThat(movement).isEqualTo(Movement.UP);
   }
@@ -79,7 +80,7 @@ class PositionTest {
     Position from = new Position(1, 1);
     Position to = new Position(7, 1);
     //when
-    Movement movement = to.convertMovement(from);
+    Movement movement = convertMovement(from, to);
     //then
     assertThat(movement).isEqualTo(Movement.RIGHT);
   }

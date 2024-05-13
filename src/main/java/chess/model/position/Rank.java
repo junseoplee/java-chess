@@ -26,6 +26,10 @@ public enum Rank {
                  .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.MISMATCH_RANK_ARGUMENT.getMessage()));
   }
 
+  public int calculateDiff(Rank other) {
+    return this.value - other.value;
+  }
+
   public int getValue() {
     return value;
   }

@@ -1,8 +1,5 @@
 package chess.model.movement;
 
-import chess.model.position.File;
-import chess.model.position.Position;
-import chess.model.position.Rank;
 import chess.view.ErrorMessage;
 import java.util.Arrays;
 
@@ -41,8 +38,11 @@ public enum Movement {
                  .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_DIRECTION.getMessage()));
   }
 
-  public Position findNextPositionFrom(File file, Rank rank) {
-    return new Position(file.getValue() + this.fileChange,
-        rank.getValue() + this.rankChange);
+  public int getFileChange() {
+    return this.fileChange;
+  }
+
+  public int getRankChange() {
+    return this.rankChange;
   }
 }

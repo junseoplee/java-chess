@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import static chess.model.movement.Movement.*;
+import static chess.model.movement.MovementConverter.convertMovement;
 
 public class Pawn extends Piece {
 
@@ -40,7 +41,7 @@ public class Pawn extends Piece {
 
   @Override
   public Path findPath(final Position from, final Position to) {
-    Movement movement = to.convertMovement(from);
+    Movement movement = convertMovement(from, to);
 
     if (isAttackMovement(movement)) { // 공격 움직임인 경우
       return findPathForAttackMovement(to, movement);
