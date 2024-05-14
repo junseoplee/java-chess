@@ -6,6 +6,7 @@ import chess.model.position.Color;
 import chess.model.position.Position;
 import chess.view.ErrorMessage;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Piece {
 
@@ -33,6 +34,19 @@ public abstract class Piece {
     if (color != turn) {
       throw new IllegalArgumentException(ErrorMessage.INVALID_TURN.getMessage());
     }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Piece piece = (Piece) o;
+    return color == piece.color;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(color);
   }
 
   public Color getColor() {
