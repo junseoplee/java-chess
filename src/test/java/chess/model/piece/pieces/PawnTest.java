@@ -29,13 +29,13 @@ class PawnTest {
 
   @ParameterizedTest
   @CsvSource({
-      "2, 2, 2, 3",
-      "2, 7, 2, 6"
+      "2, 2, 2, 3, WHITE",
+      "2, 7, 2, 6, BLACK"
   })
   @DisplayName("폰은_앞으로_한_칸_움직일_수_있다")
-  void 폰은_앞으로_한_칸_움직일_수_있다(int fromFile, int fromRank, int toFile, int toRank) {
+  void 폰은_앞으로_한_칸_움직일_수_있다(int fromFile, int fromRank, int toFile, int toRank, Color color) {
     // given
-    Pawn pawn = new Pawn(fromRank == 2 ? Color.WHITE : Color.BLACK);
+    Pawn pawn = new Pawn(color);
     Position from = new Position(fromFile, fromRank);
     Position to = new Position(toFile, toRank);
 
@@ -48,10 +48,15 @@ class PawnTest {
         .containsExactly(to);
   }
 
+  @ParameterizedTest
+  @CsvSource({
+      "2, 2, 2, 4, WHITE",
+      "2, 7, 2, 5, BLACK"
+  })
   @DisplayName("폰은_초기_위치에서_두_칸_움직일_수_있다")
-  void 폰은_초기_위치에서_두_칸_움직일_수_있다(int fromFile, int fromRank, int toFile, int toRank) {
+  void 폰은_초기_위치에서_두_칸_움직일_수_있다(int fromFile, int fromRank, int toFile, int toRank, Color color) {
     // given
-    Pawn pawn = new Pawn(fromRank == 2 ? Color.WHITE : Color.BLACK);
+    Pawn pawn = new Pawn(color);
     Position from = new Position(fromFile, fromRank);
     Position to = new Position(toFile, toRank);
 
@@ -62,21 +67,21 @@ class PawnTest {
     assertThat(path)
         .extracting("positions", InstanceOfAssertFactories.list(Position.class))
         .containsExactly(
-            new Position(fromFile, fromRank == 2 ? 3 : 6),
+            new Position(fromFile, fromRank + (color == Color.WHITE ? 1 : -1)),
             to);
   }
 
   @ParameterizedTest
   @CsvSource({
-      "2, 2, 3, 3",
-      "2, 2, 1, 3",
-      "2, 7, 3, 6",
-      "2, 7, 1, 6"
+      "2, 2, 3, 3, WHITE",
+      "2, 2, 1, 3, WHITE",
+      "2, 7, 3, 6, BLACK",
+      "2, 7, 1, 6, BLACK"
   })
   @DisplayName("폰은_대각선으로_한_칸_움직여_적을_공격할_수_있다")
-  void 폰은_대각선으로_한_칸_움직여_적을_공격할_수_있다(int fromFile, int fromRank, int toFile, int toRank) {
+  void 폰은_대각선으로_한_칸_움직여_적을_공격할_수_있다(int fromFile, int fromRank, int toFile, int toRank, Color color) {
     // given
-    Pawn pawn = new Pawn(fromRank == 2 ? Color.WHITE : Color.BLACK);
+    Pawn pawn = new Pawn(color);
     Position from = new Position(fromFile, fromRank);
     Position to = new Position(toFile, toRank);
 
@@ -111,9 +116,9 @@ class PawnTest {
     Position from = new Position(2, 3);
     Position to = new Position(2, 5);
 
-    // when & then
+    // when & then 
     assertThatThrownBy(() -> pawn.findPath(from, to))
-        .isInstanceOf(IllegalStateException.class)
+        .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(ErrorMessage.INVALID_DIRECTION.getMessage());
   }
 }
