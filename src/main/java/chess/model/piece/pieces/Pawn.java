@@ -6,7 +6,7 @@ import chess.model.piece.Piece;
 import chess.model.position.Color;
 import chess.model.position.Position;
 
-import chess.view.ErrorMessage;
+import chess.model.ErrorMessage;
 import java.util.List;
 import java.util.Map;
 
@@ -85,10 +85,5 @@ public class Pawn extends Piece {
 
   private boolean isInInitialPosition(final Position from) {
     return from.getRank().getValue() == INITIAL_POSITION_RANK.get(getColor());
-  }
-
-  @Override
-  public void validateSameColor(Piece other) {
-    // Pawn의 경우 목적지에 도착했을 때 색 검사를 하지 않음
   }
 }

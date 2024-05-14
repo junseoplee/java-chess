@@ -1,7 +1,5 @@
 package chess.model;
 
-import chess.view.ErrorMessage;
-
 import java.util.List;
 
 public class Command {

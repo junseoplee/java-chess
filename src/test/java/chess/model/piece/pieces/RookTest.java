@@ -3,11 +3,9 @@ package chess.model.piece.pieces;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import chess.model.movement.Path;
 import chess.model.position.Color;
 import chess.model.position.Position;
-import chess.view.ErrorMessage;
-import org.assertj.core.api.InstanceOfAssertFactories;
+import chess.model.ErrorMessage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package chess.model.movement;
 
 import chess.model.position.Position;
-import chess.view.ErrorMessage;
+import chess.model.ErrorMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

@@ -7,7 +7,7 @@ import chess.model.board.Board;
 import chess.model.board.InitialBoard;
 import chess.model.position.Color;
 import chess.model.position.Position;
-import chess.view.ErrorMessage;
+import chess.model.ErrorMessage;
 import chess.view.InputView;
 import chess.view.OutputView;
 

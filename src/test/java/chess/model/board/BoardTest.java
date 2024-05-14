@@ -10,7 +10,7 @@ import chess.model.piece.pieces.Rook;
 import chess.model.position.Color;
 import chess.model.position.InitialPosition;
 import chess.model.position.Position;
-import chess.view.ErrorMessage;
+import chess.model.ErrorMessage;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;

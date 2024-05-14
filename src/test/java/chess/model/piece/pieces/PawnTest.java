@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import chess.model.movement.Path;
 import chess.model.position.Color;
 import chess.model.position.Position;
-import chess.view.ErrorMessage;
+import chess.model.ErrorMessage;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -116,7 +116,7 @@ class PawnTest {
     Position from = new Position(2, 3);
     Position to = new Position(2, 5);
 
-    // when & then 
+    // when & then
     assertThatThrownBy(() -> pawn.findPath(from, to))
         .isInstanceOf(IllegalArgumentException.class)
         .hasMessageContaining(ErrorMessage.INVALID_DIRECTION.getMessage());

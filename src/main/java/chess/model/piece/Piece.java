@@ -4,7 +4,7 @@ import chess.model.movement.Movement;
 import chess.model.movement.Path;
 import chess.model.position.Color;
 import chess.model.position.Position;
-import chess.view.ErrorMessage;
+import chess.model.ErrorMessage;
 import java.util.List;
 import java.util.Objects;
 

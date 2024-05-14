@@ -1,6 +1,6 @@
 package chess.model.position;
 
-import chess.view.ErrorMessage;
+import chess.model.ErrorMessage;
 import java.util.Arrays;
 
 public enum Rank {

@@ -1,5 +1,6 @@
 package chess.view;
 
+import chess.model.ErrorMessage;
 import chess.model.piece.Piece;
 import chess.model.piece.pieces.*;
 import chess.model.position.Color;

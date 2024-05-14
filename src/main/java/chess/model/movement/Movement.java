@@ -1,6 +1,6 @@
 package chess.model.movement;
 
-import chess.view.ErrorMessage;
+import chess.model.ErrorMessage;
 import java.util.Arrays;
 
 public enum Movement {

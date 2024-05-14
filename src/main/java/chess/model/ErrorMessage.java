@@ -1,4 +1,4 @@
-package chess.view;
+package chess.model;
 
 public enum ErrorMessage {
   INVALID_START_COMMAND("[ERROR] 게임 시작 명령은 start여야 합니다."),
