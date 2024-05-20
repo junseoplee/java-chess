@@ -25,7 +25,7 @@ public abstract class Piece {
   }
 
   public void validateSameColor(Piece other) {
-    if (other != null && color.isSameColor(other.color)) {
+    if (color.isSameColor(other.color)) {
       throw new IllegalArgumentException(ErrorMessage.SAME_COLOR_PIECE.getMessage());
     }
   }
