@@ -33,12 +33,6 @@ public class CommandFactory {
     });
   }
 
-  private static Position parsePosition(String position) {
-    int file = position.charAt(0) - 'a' + 1;
-    int rank = position.charAt(1) - '0';
-    return new Position(file, rank); // 생성자에 1~8 유효성 검사가 있다
-  }
-
   public static CommandLauncher createCommand(String inputCommand) {
     List<String> commandParts = List.of(inputCommand.split(" "));
     String command = commandParts.get(COMMAND_INDEX);
@@ -48,5 +42,11 @@ public class CommandFactory {
       throw new IllegalArgumentException(ErrorMessage.INVALID_COMMAND.getMessage());
     }
     return commandCreator.apply(commandParts);
+  }
+
+  private static Position parsePosition(String position) {
+    int file = position.charAt(0) - 'a' + 1;
+    int rank = position.charAt(1) - '0';
+    return new Position(file, rank); // 생성자에 1~8 유효성 검사가 있다
   }
 }

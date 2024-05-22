@@ -16,13 +16,15 @@ public class ChessController {
 
   private final InputView inputView;
   private final OutputView outputView;
+  private final CommandFactory commandFactory;
   private final Board board;
   private Color currentTurn;
   private boolean isRunning;
 
-  public ChessController(InputView inputView, OutputView outputView, InitialBoard initialBoard) {
+  public ChessController(InputView inputView, OutputView outputView, CommandFactory commandFactory, InitialBoard initialBoard) {
     this.inputView = inputView;
     this.outputView = outputView;
+    this.commandFactory = commandFactory;
     this.board = initialBoard.createInitialBoard();
     this.currentTurn = Color.WHITE;
     this.isRunning = true;
@@ -35,7 +37,7 @@ public class ChessController {
     while (receivedCommand == null) {
       try {
         String initialCommandInput = inputView.receiveCommand();
-        receivedCommand = CommandFactory.createCommand(initialCommandInput);
+        receivedCommand = commandFactory.createCommand(initialCommandInput);
         if (!(receivedCommand instanceof StartCommand) && !(receivedCommand instanceof EndCommand)) {
           receivedCommand = null;
           System.out.println(ErrorMessage.INVALID_START_COMMAND.getMessage());
@@ -49,7 +51,7 @@ public class ChessController {
 
     while (isRunning) {
       try {
-        receivedCommand = CommandFactory.createCommand(inputView.receiveCommand());
+        receivedCommand = commandFactory.createCommand(inputView.receiveCommand());
         receivedCommand.execute(this);
       } catch (IllegalArgumentException exception) {
         System.out.println(exception.getMessage());
