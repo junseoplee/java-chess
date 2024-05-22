@@ -44,12 +44,12 @@ public abstract class Piece {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Piece piece = (Piece) o;
-    return color == piece.color;
+    return color == piece.color && this.getClass().equals(piece.getClass());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(color);
+    return Objects.hash(color, getClass());
   }
 
   public Color getColor() {
