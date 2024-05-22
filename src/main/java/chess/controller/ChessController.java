@@ -1,13 +1,14 @@
 package chess.controller;
 
-import static chess.model.Command.END_COMMAND;
-
-import chess.model.Command;
+import chess.model.Command.CommandFactory;
+import chess.model.Command.CommandLauncher;
+import chess.model.Command.EndCommand;
+import chess.model.Command.StartCommand;
+import chess.model.ErrorMessage;
 import chess.model.board.Board;
 import chess.model.board.InitialBoard;
 import chess.model.position.Color;
 import chess.model.position.Position;
-import chess.model.ErrorMessage;
 import chess.view.InputView;
 import chess.view.OutputView;
 
@@ -17,47 +18,56 @@ public class ChessController {
   private final OutputView outputView;
   private final Board board;
   private Color currentTurn;
+  private boolean isRunning;
 
   public ChessController(InputView inputView, OutputView outputView, InitialBoard initialBoard) {
     this.inputView = inputView;
     this.outputView = outputView;
     this.board = initialBoard.createInitialBoard();
     this.currentTurn = Color.WHITE;
+    this.isRunning = true;
   }
 
   public void runChess() {
     outputView.printStartMessage();
-    Command receivedCommand = new Command(inputView.receiveCommand());
+    CommandLauncher receivedCommand = null;
 
-    if (receivedCommand.getCommand().equals(END_COMMAND)) {
-      return;
-    }
-    if (!receivedCommand.getCommand().equals(Command.START_COMMAND)) {
-      throw new IllegalArgumentException(ErrorMessage.INVALID_START_COMMAND.getMessage());
-    }
-
-    outputView.printBoard(board.getMap());
-
-    while (true) {
+    while (receivedCommand == null) {
       try {
-        receivedCommand = new Command(inputView.receiveCommand());
-        if (receivedCommand.getCommand().equals(END_COMMAND)) {
-          break;
+        String initialCommandInput = inputView.receiveCommand();
+        receivedCommand = CommandFactory.createCommand(initialCommandInput);
+        if (!(receivedCommand instanceof StartCommand) && !(receivedCommand instanceof EndCommand)) {
+          receivedCommand = null;
+          System.out.println(ErrorMessage.INVALID_START_COMMAND.getMessage());
         }
-        Position sourcePosition = parsePosition(receivedCommand.getSourcePosition());
-        Position targetPosition = parsePosition(receivedCommand.getTargetPosition());
-        board.move(sourcePosition, targetPosition, currentTurn);
-        currentTurn = currentTurn.changeTurn(currentTurn);
-        outputView.printBoard(board.getMap());
+      } catch (IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+      }
+    }
+
+    receivedCommand.execute(this);
+
+    while (isRunning) {
+      try {
+        receivedCommand = CommandFactory.createCommand(inputView.receiveCommand());
+        receivedCommand.execute(this);
       } catch (IllegalArgumentException exception) {
         System.out.println(exception.getMessage());
       }
     }
   }
 
-  private Position parsePosition(String position) {
-    int file = position.charAt(0) - 'a' + 1;
-    int rank = position.charAt(1) - '0';
-    return new Position(file, rank); // 생성자에 1~8 유효성 검사가 있다
+  public void startGame() {
+    outputView.printBoard(board.getMap());
+  }
+
+  public void endGame() {
+    isRunning = false;
+  }
+
+  public void movePiece(Position source, Position target) {
+    board.move(source, target, currentTurn);
+    currentTurn = currentTurn.changeTurn(currentTurn);
+    outputView.printBoard(board.getMap());
   }
 }
