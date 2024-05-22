@@ -1,9 +1,9 @@
 package chess.controller;
 
-import chess.model.Command.CommandFactory;
-import chess.model.Command.CommandLauncher;
-import chess.model.Command.EndCommand;
-import chess.model.Command.StartCommand;
+import chess.model.command.CommandFactory;
+import chess.model.command.CommandLauncher;
+import chess.model.command.commands.EndCommand;
+import chess.model.command.commands.StartCommand;
 import chess.model.ErrorMessage;
 import chess.model.board.Board;
 import chess.model.board.InitialBoard;

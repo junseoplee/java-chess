@@ -1,5 +1,8 @@
-package chess.model.Command;
+package chess.model.command;
 
+import chess.model.command.commands.EndCommand;
+import chess.model.command.commands.MoveCommand;
+import chess.model.command.commands.StartCommand;
 import chess.model.ErrorMessage;
 import chess.model.position.Position;
 import java.util.HashMap;

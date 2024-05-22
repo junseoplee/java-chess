@@ -1,7 +1,7 @@
 package chess;
 
 import chess.controller.ChessController;
-import chess.model.Command.CommandFactory;
+import chess.model.command.CommandFactory;
 import chess.model.board.InitialBoard;
 import chess.view.InputView;
 import chess.view.OutputView;

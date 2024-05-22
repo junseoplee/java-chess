@@ -1,4 +1,4 @@
-package chess.model.Command;
+package chess.model.command;
 
 import chess.controller.ChessController;
 

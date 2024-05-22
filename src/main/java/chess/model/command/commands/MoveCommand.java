@@ -1,6 +1,7 @@
-package chess.model.Command;
+package chess.model.command.commands;
 
 import chess.controller.ChessController;
+import chess.model.command.CommandLauncher;
 import chess.model.position.Position;
 
 public class MoveCommand implements CommandLauncher {
