@@ -8,4 +8,9 @@ public class EndCommand implements CommandLauncher {
   public void execute(ChessController controller) {
     controller.endGame();
   }
+
+  @Override
+  public boolean validateInitialCommandType() {
+    return true;
+  }
 }

@@ -38,16 +38,17 @@ public class ChessController {
       try {
         String initialCommandInput = inputView.receiveCommand();
         receivedCommand = commandFactory.createCommand(initialCommandInput);
-        if (!(receivedCommand instanceof StartCommand) && !(receivedCommand instanceof EndCommand)) {
-          receivedCommand = null;
-          System.out.println(ErrorMessage.INVALID_START_COMMAND.getMessage());
+        if (receivedCommand.validateInitialCommandType()) {
+          break;
         }
-      } catch (IllegalArgumentException e) {
-        System.out.println(e.getMessage());
+        System.out.println(ErrorMessage.INVALID_INITIAL_COMMAND.getMessage());
+        receivedCommand = null;
+      } catch (IllegalArgumentException exception) {
+        System.out.println(exception.getMessage());
       }
     }
 
-    receivedCommand.execute(this);
+      receivedCommand.execute(this);
 
     while (isRunning) {
       try {

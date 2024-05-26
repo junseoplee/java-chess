@@ -17,4 +17,9 @@ public class MoveCommand implements CommandLauncher {
   public void execute(ChessController controller) {
     controller.movePiece(source, target);
   }
+
+  @Override
+  public boolean validateInitialCommandType() {
+    return false;
+  }
 }
