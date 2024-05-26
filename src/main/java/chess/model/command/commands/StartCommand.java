@@ -8,4 +8,9 @@ public class StartCommand implements CommandLauncher {
   public void execute(ChessController controller) {
     controller.startGame();
   }
+
+  @Override
+  public boolean validateInitialCommandType() {
+    return true;
+  }
 }
