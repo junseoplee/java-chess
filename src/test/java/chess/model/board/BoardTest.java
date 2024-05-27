@@ -132,4 +132,23 @@ class BoardTest {
     assertThat(retrievedMap).containsEntry(to, new Pawn(Color.WHITE));
     assertThat(retrievedMap).doesNotContainKey(from);
   }
+
+  @Test
+  @DisplayName("상대방_말이_있는_곳으로_움직이면_상대방_말을_제거한다")
+  void 상대방_말이_있는_곳으로_움직이면_상대방_말을_제거한다() {
+    //given
+    Position from = new Position(3, 4); // white
+    Position to = new Position(2, 5); // black
+    initialBoard.put(from, new Pawn(Color.WHITE));
+    initialBoard.put(to, new Pawn(Color.BLACK));
+
+    //when
+    board.move(from, to, Color.WHITE);
+    Map<Position, Piece> retrievedMap = board.getMap();
+
+    //then
+    assertThat(retrievedMap).containsEntry(to, new Pawn(Color.WHITE));
+    assertThat(retrievedMap).doesNotContainKey(from);
+    assertThat(retrievedMap).doesNotContainEntry(to, new Pawn(Color.BLACK));
+  }
 }

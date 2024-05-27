@@ -17,6 +17,7 @@ public class Board {
 
   public void move(final Position from, final Position to, final Color turn) {
     validateMove(from, to, turn);
+    capturePiece(to);
     movePiece(from, to);
   }
 
@@ -28,7 +29,7 @@ public class Board {
     board.get(from).validateSameColor(destination);
 
     Path path = board.get(from).findPath(from, to);
-    path.validatePath(board.keySet());
+    path.validatePath(board.keySet(), to);
   }
 
   private void validateNotEmpty(final Position from) {
@@ -44,6 +45,10 @@ public class Board {
   private void movePiece(final Position from, final Position to) {
     Piece piece = board.remove(from);
     board.put(to, piece);
+  }
+
+  private void capturePiece(final Position to) {
+    board.remove(to);
   }
 
   public Map<Position, Piece> getMap() {
