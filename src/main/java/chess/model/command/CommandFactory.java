@@ -36,7 +36,7 @@ public class CommandFactory {
     });
   }
 
-  public static CommandLauncher createCommand(String inputCommand) {
+  public CommandLauncher createCommand(String inputCommand) {
     List<String> commandParts = List.of(inputCommand.split(" "));
     String command = commandParts.get(COMMAND_INDEX);
 
