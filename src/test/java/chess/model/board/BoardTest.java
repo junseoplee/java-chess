@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import chess.model.piece.Piece;
+import chess.model.piece.PieceInfo;
 import chess.model.piece.pieces.King;
 import chess.model.piece.pieces.Pawn;
 import chess.model.piece.pieces.Rook;
@@ -150,5 +151,22 @@ class BoardTest {
     assertThat(retrievedMap).containsEntry(to, new Pawn(Color.WHITE));
     assertThat(retrievedMap).doesNotContainKey(from);
     assertThat(retrievedMap).doesNotContainEntry(to, new Pawn(Color.BLACK));
+  }
+
+  @Test
+  @DisplayName("킹이_잡히면_킹을_캡쳐된_피스로_반환한다")
+  void 킹이_잡히면_킹을_캡쳐된_피스로_반환한다() {
+    // given
+    Position from = new Position(3, 4); // white
+    Position to = new Position(2, 5); // black king
+    initialBoard.put(from, new Pawn(Color.WHITE));
+    initialBoard.put(to, new King(Color.BLACK));
+
+    // when
+    Piece capturedPiece = board.move(from, to, Color.WHITE);
+
+    // then
+    assertThat(capturedPiece.pieceType()).isEqualTo(PieceInfo.KING);
+    assertThat(capturedPiece.getColor()).isEqualTo(Color.BLACK);
   }
 }

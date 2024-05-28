@@ -15,10 +15,11 @@ public class Board {
     this.board = board;
   }
 
-  public void move(final Position from, final Position to, final Color turn) {
+  public Piece move(final Position from, final Position to, final Color turn) {
     validateMove(from, to, turn);
-    capturePiece(to);
+    Piece capturedPiece = capturePiece(to);
     movePiece(from, to);
+    return capturedPiece;
   }
 
   private void validateMove(final Position from, final Position to, final Color turn) {
@@ -47,8 +48,8 @@ public class Board {
     board.put(to, piece);
   }
 
-  private void capturePiece(final Position to) {
-    board.remove(to);
+  private Piece capturePiece(final Position to) {
+    return board.remove(to);
   }
 
   public Map<Position, Piece> getMap() {

@@ -2,11 +2,11 @@ package chess.controller;
 
 import chess.model.command.CommandFactory;
 import chess.model.command.CommandLauncher;
-import chess.model.command.commands.EndCommand;
-import chess.model.command.commands.StartCommand;
 import chess.model.ErrorMessage;
 import chess.model.board.Board;
 import chess.model.board.InitialBoard;
+import chess.model.piece.Piece;
+import chess.model.piece.PieceInfo;
 import chess.model.position.Color;
 import chess.model.position.Position;
 import chess.view.InputView;
@@ -69,7 +69,10 @@ public class ChessController {
   }
 
   public void movePiece(Position source, Position target) {
-    board.move(source, target, currentTurn);
+    Piece capturedPiece = board.move(source, target, currentTurn);
+    if (capturedPiece.pieceType() == PieceInfo.KING) {
+      endGame();
+    }
     currentTurn = currentTurn.changeTurn(currentTurn);
     outputView.printBoard(board.getMap());
   }
