@@ -13,4 +13,9 @@ public class StartCommand implements CommandLauncher {
   public boolean validateInitialCommandType() {
     return true;
   }
+
+  @Override
+  public boolean validateStatusCommandType() {
+    return false;
+  }
 }
