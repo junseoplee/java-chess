@@ -9,6 +9,7 @@ import chess.model.piece.Piece;
 import chess.model.piece.PieceInfo;
 import chess.model.position.Color;
 import chess.model.position.Position;
+import chess.model.score.ScoreCalculator;
 import chess.view.InputView;
 import chess.view.OutputView;
 
@@ -75,5 +76,10 @@ public class ChessController {
     }
     currentTurn = currentTurn.changeTurn(currentTurn);
     outputView.printBoard(board.getMap());
+  }
+
+  public void calculateAndPrintCurrentTurnScore() {
+    double score = ScoreCalculator.calculate(board.getMap(), currentTurn);
+    outputView.printCurrentTurnScore(currentTurn, score);
   }
 }
