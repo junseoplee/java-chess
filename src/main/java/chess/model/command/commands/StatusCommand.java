@@ -2,8 +2,6 @@ package chess.model.command.commands;
 
 import chess.controller.ChessController;
 import chess.model.command.CommandLauncher;
-import chess.model.score.ScoreCalculator;
-import chess.model.position.Color;
 
 public class StatusCommand implements CommandLauncher {
   @Override
@@ -14,5 +12,10 @@ public class StatusCommand implements CommandLauncher {
   @Override
   public boolean validateInitialCommandType() {
     return false;
+  }
+
+  @Override
+  public boolean validateStatusCommandType() {
+    return true;
   }
 }

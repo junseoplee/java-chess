@@ -49,12 +49,18 @@ public class ChessController {
       }
     }
 
-      receivedCommand.execute(this);
+    receivedCommand.execute(this);
 
     while (isRunning) {
       try {
-        receivedCommand = commandFactory.createCommand(inputView.receiveCommand());
-        receivedCommand.execute(this);
+        String commandInput = inputView.receiveCommand();
+        receivedCommand = commandFactory.createCommand(commandInput);
+        if (receivedCommand.validateStatusCommandType()) {
+          calculateAndPrintCurrentTurnScore();
+        } else {
+          receivedCommand.execute(this);
+          currentTurn = currentTurn.changeTurn(currentTurn);
+        }
       } catch (IllegalArgumentException exception) {
         System.out.println(exception.getMessage());
       }
@@ -71,10 +77,9 @@ public class ChessController {
 
   public void movePiece(Position source, Position target) {
     Piece capturedPiece = board.move(source, target, currentTurn);
-    if (capturedPiece.pieceType() == PieceInfo.KING) {
+    if (capturedPiece != null && capturedPiece.pieceType() == PieceInfo.KING) {
       endGame();
     }
-    currentTurn = currentTurn.changeTurn(currentTurn);
     outputView.printBoard(board.getMap());
   }
 

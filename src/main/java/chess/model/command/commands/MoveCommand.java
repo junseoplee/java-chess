@@ -22,4 +22,9 @@ public class MoveCommand implements CommandLauncher {
   public boolean validateInitialCommandType() {
     return false;
   }
+
+  @Override
+  public boolean validateStatusCommandType() {
+    return false;
+  }
 }
