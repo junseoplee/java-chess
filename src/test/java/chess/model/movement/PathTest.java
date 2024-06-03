@@ -22,7 +22,7 @@ class PathTest {
     Path path = new Path(List.of(start, obstacle, target));
 
     // then
-    assertThatThrownBy(() -> path.validatePath(Set.of(obstacle), target))
+    assertThatThrownBy(() -> path.validateObstacle(Set.of(obstacle)))
         .isInstanceOf(IllegalArgumentException.class);
   }
 
@@ -37,6 +37,6 @@ class PathTest {
     Path path = new Path(List.of(start, target));
 
     // then
-    path.validatePath(Set.of(), target); // 장애물이 없는 경우 예외가 발생하지 않음
+    path.validateObstacle(Set.of()); // 장애물이 없는 경우 예외가 발생하지 않음
   }
 }

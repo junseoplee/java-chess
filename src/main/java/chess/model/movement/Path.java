@@ -14,9 +14,8 @@ public class Path {
     this.positions = positions;
   }
 
-  public void validatePath(final Set<Position> keySet, final Position target) {
+  public void validateObstacle(final Set<Position> keySet) {
     final List<Position> positions = new ArrayList<>(this.positions);
-    positions.remove(target);
     positions.retainAll(keySet);
     if (!positions.isEmpty()) {
       throw new IllegalArgumentException(ErrorMessage.HAS_OBSTACLE.getMessage());
