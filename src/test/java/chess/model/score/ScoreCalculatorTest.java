@@ -44,8 +44,50 @@ public class ScoreCalculatorTest {
   }
 
   @Test
-  @DisplayName("점수_계산")
-  void 점수_계산() {
+  @DisplayName("검은색_말_점수_계산")
+  void 검은색_말_점수_계산() {
+    // given
+    Map<Position, Piece> boardMap = board.getMap();
+
+    // when
+    double blackScore = ScoreCalculator.calculate(boardMap, Color.BLACK);
+
+    // then
+    assertThat(blackScore).isEqualTo(20.0); // 검은색 말의 예상 점수
+  }
+
+  @Test
+  @DisplayName("흰색_말_점수_계산")
+  void 흰색_말_점수_계산() {
+    // given
+    Map<Position, Piece> boardMap = board.getMap();
+
+    // when
+    double whiteScore = ScoreCalculator.calculate(boardMap, Color.WHITE);
+
+    // then
+    assertThat(whiteScore).isEqualTo(19.5); // 흰색 말의 예상 점수
+  }
+
+  @Test
+  @DisplayName("같은_파일에_있는_폰의_점수_계산")
+  void 같은_파일에_있는_폰의_점수_계산() {
+    // given
+    Map<Position, Piece> boardMap = new HashMap<>();
+    boardMap.put(new Position(1, 2), new Pawn(Color.WHITE));
+    boardMap.put(new Position(1, 3), new Pawn(Color.WHITE));
+    board = new Board(boardMap);
+
+    // when
+    double whiteScore = ScoreCalculator.calculate(boardMap, Color.WHITE);
+
+    // then
+    assertThat(whiteScore).isEqualTo(1.0); // 같은 파일에 있는 흰색 폰의 점수 계산 (0.5 * 2)
+  }
+
+  @Test
+  @DisplayName("혼합된_말의_점수_계산")
+  void 혼합된_말의_점수_계산() {
     // given
     Map<Position, Piece> boardMap = board.getMap();
 
@@ -56,5 +98,23 @@ public class ScoreCalculatorTest {
     // then
     assertThat(blackScore).isEqualTo(20.0);
     assertThat(whiteScore).isEqualTo(19.5);
+  }
+
+  @Test
+  @DisplayName("한쪽_말만_있는_경우_점수_계산")
+  void 한쪽_말만_있는_경우_점수_계산() {
+    // given
+    Map<Position, Piece> boardMap = new HashMap<>();
+    boardMap.put(new Position(1, 2), new Rook(Color.WHITE));
+    boardMap.put(new Position(1, 7), new Queen(Color.BLACK));
+    board = new Board(boardMap);
+
+    // when
+    double whiteScore = ScoreCalculator.calculate(boardMap, Color.WHITE);
+    double blackScore = ScoreCalculator.calculate(boardMap, Color.BLACK);
+
+    // then
+    assertThat(whiteScore).isEqualTo(5.0); // 흰색 룩의 점수
+    assertThat(blackScore).isEqualTo(9.0); // 검은색 퀸의 점수
   }
 }
